@@ -15,6 +15,3 @@ docs/
 
 # Node modules
 node_modules/
-
-# Libraries
-lib/
