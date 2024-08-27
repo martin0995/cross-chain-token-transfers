@@ -131,7 +131,25 @@ async function main() {
 	const recipientAddress = readlineSync.question(
 		'Enter the recipient address on the target chain: '
 	);
-	const amount = ethers.parseUnits(readlineSync.question("Enter the amount of tokens to transfer: "), 18);
+
+	// Get the token contract
+	const tokenContractDecimals = new ethers.Contract(
+		tokenAddress,
+		[
+			'function decimals() view returns (uint8)',
+			'function approve(address spender, uint256 amount) public returns (bool)',
+		],
+		wallet
+	);
+
+	// Fetch the token decimals
+	const decimals = await tokenContractDecimals.decimals();
+
+	// Get the amount from the user, then parse it according to the token's decimals
+	const amount = ethers.parseUnits(
+		readlineSync.question('Enter the amount of tokens to transfer: '),
+		decimals
+	);
 
 	// Calculate the cross-chain transfer cost
 	const cost = await CrossChainSender.quoteCrossChainDeposit(targetChainId);
