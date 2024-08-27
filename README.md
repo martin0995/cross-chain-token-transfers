@@ -78,7 +78,7 @@ You can obtain USDC on TestNets via the official USDC faucet:
 
  - [USDC Testnet Faucet](https://faucet.circle.com/)
 
- Once you have USDC, use the addresses above to transfer between testnets.
+ Once you have USDC, use the addresses above to transfer between TestNets.
 
 ## Contracts Overview
 
@@ -97,4 +97,9 @@ The project includes two main contracts:
 ## Notes
 
  - Ensure your wallet has enough TestNet tokens to cover gas fees on both the source and target chains.
- - The current setup supports ERC-20 tokens like WETH, USDC, and WBTC.
+ - Once the transaction is completed, you can check its status using the [Wormhole Explorer](https://wormholescan.io/). Just enter the transaction hash to see detailed information.
+ - If the token isn’t visible in your wallet on the target chain, the Wormhole Explorer provides a button to automatically add it to MetaMask on the _target chain_, allowing you to view the updated balance immediately.
+
+<div align="center">
+ <img src="https://github.com/user-attachments/assets/e2ae584a-1a41-4f20-9703-0fe7de230e3f" alt="metamask" width="800"/>
+</div>
