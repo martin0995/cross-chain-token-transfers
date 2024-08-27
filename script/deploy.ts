@@ -17,6 +17,7 @@ interface ChainConfig {
 
 interface DeployedContracts {
   [chainId: number]: {
+    networkName: string;
     CrossChainSender?: string;
     CrossChainReceiver?: string;
     deployedAt: string;
@@ -103,10 +104,12 @@ async function main() {
   }
 
   deployedContracts[sourceChain.chainId] = {
+    networkName: sourceChain.description,
     CrossChainSender: senderAddress.toString(),
     deployedAt: new Date().toISOString(),
   };
   deployedContracts[targetChain.chainId] = {
+    networkName: targetChain.description,
     CrossChainReceiver: receiverAddress.toString(),
     deployedAt: new Date().toISOString(),
   };
