@@ -49,13 +49,13 @@ Edit the `config.js` file to include the chain IDs, contract addresses, and RPC 
 
 Before initiating a cross-chain token transfer, it's recommended to check if the desired token is attested on the target chain. This ensures that the token can be successfully transferred.
 
-1. Run the token attestation check script:
+**1. Run the token attestation check script:**
   
   ```bash
     npm run verify
   ```
 
-2. Follow the prompts to input:
+**2. Follow the prompts to input:**
 
 - The RPC URL of the target chain
 - The Token Bridge contract address on the target chain
