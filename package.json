@@ -10,7 +10,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "npx ts-node script/deploy.ts",
-    "transfer": "npx ts-node script/transfer.ts"
+    "transfer": "npx ts-node script/transfer.ts",
+    "verify": "npx ts-node script/check-attestation.ts"
   },
   "keywords": [],
   "author": "",
