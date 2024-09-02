@@ -1,6 +1,6 @@
 # Cross-Chain Token Transfer
 
-This repository demonstrates how to deploy and interact with smart contracts for transferring ERC-20 tokens across different blockchains using the Wormhole Protocol.
+This repository demonstrates how to deploy and interact with smart contracts for transferring ERC-20 tokens across different blockchains using the Wormhole Protocol. Additionally, it provides a utility to verify whether a token is attested on the target chain before attempting a cross-chain transfer. This ensures that the token can be transferred smoothly across chains using the Wormhole Bridge.
 
 ## Prerequisites
 
@@ -44,6 +44,25 @@ Edit the `config.js` file to include the chain IDs, contract addresses, and RPC 
 ```bash
   forge compile
 ```
+
+## Verify Token Attestation
+
+Before initiating a cross-chain token transfer, it's recommended to check if the desired token is attested on the target chain. This ensures that the token can be successfully transferred.
+
+1. Run the token attestation check script:
+  
+  ```bash
+    npm run verify
+  ```
+
+2. Follow the prompts to input:
+
+- The RPC URL of the target chain
+- The Token Bridge contract address on the target chain
+- The token contract address on the source chain
+- The source chain ID
+
+The script will inform you if the token has been attested on the target chain, providing the wrapped token address if it exists.
 
 ## Deployment
 
