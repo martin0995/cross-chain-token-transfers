@@ -1,4 +1,4 @@
-import { ethers } from 'ethers';
+import { BytesLike, ethers } from 'ethers';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as dotenv from 'dotenv';
@@ -101,6 +101,25 @@ async function main() {
 		const receiverAddress = (receiverContract as ethers.Contract).target;
 		console.log(`CrossChainReceiver deployed on ${targetChain.description} at: ${receiverAddress}`);
 
+		// Register the sender contract in the receiver contract
+		console.log(
+			`Registering CrossChainSender (${senderAddress}) as a valid sender in CrossChainReceiver (${receiverAddress})...`
+		);
+
+		const CrossChainReceiverContract = new ethers.Contract(
+			receiverAddress,
+			receiverJson.abi,
+			targetWallet
+		);
+
+		const tx = await CrossChainReceiverContract.setRegisteredSender(
+			sourceChain.chainId, // Chain ID of the source chain
+			ethers.zeroPadValue(senderAddress as BytesLike, 32) // Address of the deployed sender contract
+		);
+
+		await tx.wait(); // Wait for the transaction to be confirmed
+		console.log(`CrossChainSender registered as a valid sender on ${targetChain.description}`);
+
 		// Load existing deployed contract addresses from contracts.json
 		const deployedContractsPath = path.resolve(__dirname, '../deploy-config/contracts.json');
 		let deployedContracts: DeployedContracts = {};
@@ -132,15 +151,15 @@ async function main() {
 		// Save the updated contracts.json file
 		fs.writeFileSync(deployedContractsPath, JSON.stringify(deployedContracts, null, 2));
 	} catch (error: any) {
-    if (error.code === "INSUFFICIENT_FUNDS") {
-      console.error(
-        'Error: Insufficient funds for deployment. Please make sure your wallet has enough funds to cover the gas fees.'
-      );
-    } else {
-      console.error('An unexpected error occurred:', error.message);
-    }
-    process.exit(1);
-  }
+		if (error.code === 'INSUFFICIENT_FUNDS') {
+			console.error(
+				'Error: Insufficient funds for deployment. Please make sure your wallet has enough funds to cover the gas fees.'
+			);
+		} else {
+			console.error('An unexpected error occurred:', error.message);
+		}
+		process.exit(1);
+	}
 }
 
 main().catch((error) => {
