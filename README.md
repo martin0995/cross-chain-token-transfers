@@ -45,25 +45,6 @@ Edit the `config.js` file to include the chain IDs, contract addresses, and RPC 
   forge compile
 ```
 
-## Verify Token Attestation
-
-Before initiating a cross-chain token transfer, it's recommended to check if the desired token is attested on the target chain. This ensures that the token can be successfully transferred.
-
-1. Run the token attestation check script:
-  
-  ```bash
-    npm run verify
-  ```
-
-2. Follow the prompts to input:
-
-- The RPC URL of the target chain
-- The Token Bridge contract address on the target chain
-- The token contract address on the source chain
-- The source chain ID
-
-The script will inform you if the token has been attested on the target chain, providing the wrapped token address if it exists.
-
 ## Deployment
 
 To deploy the smart contracts:
@@ -72,8 +53,27 @@ To deploy the smart contracts:
   npm run deploy
 ```
 
- - You will be prompted to select the **`source`** and **`target`** chains for deployment.
- - The deployed contract addresses will be saved and updated in `deploy-config/contracts.json`.
+ - You will be prompted to select the **`source`** and **`target`** chains for deployment
+ - The deployed contract addresses will be saved and updated in `deploy-config/contracts.json`
+
+## Verify Token Attestation
+
+Before initiating a cross-chain token transfer, it's recommended to check if the desired token is attested on the target chain. This ensures that the token can be successfully transferred.
+
+**1. Run the token attestation check script:**
+  
+  ```bash
+    npm run verify
+  ```
+
+**2. Follow the prompts to input:**
+
+- The RPC URL of the target chain
+- The Token Bridge contract address on the target chain
+- The token contract address on the source chain
+- The source chain ID
+
+The script will inform you if the token has been attested on the target chain, providing the wrapped token address if it exists.
 
 ## Token Transfer
 
@@ -83,8 +83,8 @@ To initiate a token transfer across chains:
   npm run transfer
 ```
 
- - You will be prompted to select the **`source`** and **`target`** chains for the transfer.
- - Provide the token address, recipient address on the target chain, and the amount to transfer.
+ - You will be prompted to select the **`source`** and **`target`** chains for the transfer
+ - Provide the token address, recipient address on the target chain, and the amount to transfer
 
 ## Recommended Test Setup: Transfer USDC
 
